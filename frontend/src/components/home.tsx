@@ -11,7 +11,7 @@ export default function ProjectPurna() {
   }, []);
   
   return (
-    <div className="min-h-screen w-full relative bg-cover bg-center overflow-hidden" 
+    <div className="min-h-screen w-full relative bg-cover bg-center  overflow-hidden" 
          style={{ backgroundImage: "url('https://res.cloudinary.com/dub7qyv8e/image/upload/v1745351111/ChatGPT_Image_Apr_21_2025_12_07_41_AM_w0ojn6.png')" }}>
       {/* Navigation - Optimized for mobile */}
       <nav className={`flex flex-col sm:flex-row justify-between items-center p-3 sm:p-4 md:p-6 lg:px-12 relative z-10 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
@@ -50,7 +50,7 @@ export default function ProjectPurna() {
       </nav>
 
       {/* Main Hero Content - Improved for mobile */}
-      <div className={`flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-12 pb-4 sm:pt-20 md:pt-24 md:pb-16 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div className={`flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-12 pb-4 sm:pt-20 md:pt-24 md:pb-16 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} relative z-10`}>
         <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-2 sm:mb-4 md:mb-6 tracking-wider sm:tracking-widest uppercase font-serif transition-all duration-700 hover:tracking-[0.2em] leading-relaxed">
           <span className={`inline-block sm:block transition-transform duration-700 ${isLoaded ? 'translate-x-0' : '-translate-x-20'}`}>THE MISSION TO COMPLETE</span>
           
@@ -74,8 +74,8 @@ export default function ProjectPurna() {
         </button>
       </div>
 
-      {/* Dark overlay with subtle animation */}
-      <div className="absolute inset-0 bg-black opacity-30 z-0 animate-pulse-slow"></div>
+      {/* Dark overlay with reduced opacity */}
+      <div className="absolute inset-0 bg-black opacity-60 z-0 animate-pulse-slow"></div>
     </div>
   );
 }

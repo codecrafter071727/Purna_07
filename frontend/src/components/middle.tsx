@@ -62,7 +62,7 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
       className={`flex flex-col md:flex-row ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} p-6 sm:p-8 md:p-10 w-full opacity-0 transition-opacity duration-1000`}
     >
       {/* Left side - Image with enhanced animation */}
-      <div className="w-full md:w-1/2 mb-8 md:mb-0 overflow-hidden rounded-xl transform transition-all duration-700 hover:translate-y-[-8px]">
+      <div className="w-full md:w-1/2 mb-8 md:mb-0 p-6 overflow-hidden rounded-xl transform transition-all duration-700 hover:translate-y-[-8px]">
         <div className={`relative ${darkMode ? 'shadow-[0_10px_30px_rgba(236,228,218,0.2)]' : ''} rounded-xl transition-all duration-500`}>
           <img
             src={imageUrl}

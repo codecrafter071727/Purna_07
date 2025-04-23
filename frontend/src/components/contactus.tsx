@@ -59,8 +59,8 @@ export const ContactUs: React.FC<ContactUsProps> = ({
       transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="flex flex-col md:flex-row md:space-x-8 lg:space-x-16 items-start">
-        {/* Left side - Title and subtitle with enhanced styling */}
-        <div className="w-full md:w-1/3 mb-10 md:mb-0 md:sticky md:top-16 transform transition-all duration-700 hover:translate-x-2">
+        {/* Left side with floating animation */}
+        <div className="w-full md:w-1/3 mb-10 md:mb-0 md:sticky md:top-16 transform transition-all duration-700 hover:translate-x-2 animate-float">
           <h2 className={`text-3xl sm:text-4xl font-serif mb-6 md:mb-8 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} relative`}>
             {title}
             <span className={`block w-16 h-1 ${darkMode ? 'bg-[#ECE4DA]' : 'bg-stone-600'} mt-4 transition-all duration-500 hover:w-24`}></span>
@@ -70,10 +70,19 @@ export const ContactUs: React.FC<ContactUsProps> = ({
           </p>
         </div>
         
-        {/* Right side - Form with enhanced styling and animations */}
-        <div className={`w-full md:w-2/3 ${darkMode ? 'bg-stone-700' : 'bg-[#E5DED5]'} p-6 sm:p-8 rounded-xl shadow-xl transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-1`}>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-6">
+        {/* Right side - Enhanced form with modern effects */}
+        <div className={`w-full md:w-2/3 ${
+          darkMode 
+            ? 'bg-stone-700 shadow-[0_0_30px_rgba(236,228,218,0.1)]' 
+            : 'bg-[#E5DED5] shadow-[4px_4px_20px_rgba(236,228,218,0.8)]'
+          } p-6 sm:p-8 rounded-xl transition-all duration-500 hover:shadow-[0_10px_40px_rgba(236,228,218,0.3)] transform hover:-translate-y-1 relative overflow-hidden`}>
+          
+          {/* Add a subtle background animation */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+          
+          <form onSubmit={handleSubmit} className="relative z-10">
+            {/* Input fields with enhanced animations */}
+            <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
               <label className={`block text-base sm:text-lg font-serif mb-2 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
                 Name <span className="text-sm ml-1">(required)</span>
               </label>
@@ -103,7 +112,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({
               </div>
             </div>
             
-            <div className="mb-6 transition-all duration-300 hover:translate-y-[-2px]">
+            <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
               <label className={`block text-lg font-serif mb-2 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
                 Email <span className="text-sm ml-1">(required)</span>
               </label>
@@ -117,7 +126,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({
               />
             </div>
             
-            <div className="mb-8 transition-all duration-300 hover:translate-y-[-2px]">
+            <div className="mb-8 animate-slide-up" style={{ animationDelay: '0.3s' }}>
               <label className={`block text-lg font-serif mb-2 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
                 Message <span className="text-sm ml-1">(required)</span>
               </label>
@@ -131,15 +140,18 @@ export const ContactUs: React.FC<ContactUsProps> = ({
               />
             </div>
             
-            <div className="flex justify-center sm:justify-start mt-8">
+            {/* Enhanced submit button */}
+            <div className="flex justify-center sm:justify-start mt-8 animate-slide-up" style={{ animationDelay: '0.4s' }}>
               <button
                 type="submit"
                 className={`${darkMode ? 'bg-[#ECE4DA] text-stone-800 hover:bg-[#D8CFC5]' : 'bg-stone-800 text-white hover:bg-stone-700'} 
                 px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg 
                 transition-all duration-500 hover:scale-105 hover:shadow-xl 
-                hover:tracking-wider transform hover:translate-y-[-3px] active:translate-y-[1px]`}
+                hover:tracking-wider transform hover:translate-y-[-3px] active:translate-y-[1px]
+                relative overflow-hidden group animate-glow`}
               >
-                {buttonText}
+                <span className="relative z-10">{buttonText}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shimmer"></div>
               </button>
             </div>
           </form>
