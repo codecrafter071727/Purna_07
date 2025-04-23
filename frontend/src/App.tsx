@@ -9,13 +9,11 @@ import ContactUs from './components/contactus';
 
 function App() {
   return (
-    <div className="App bg-stone-300">
-      {/* ... existing code ... */}
+    <div className="App w-full overflow-x-hidden">
       <Home />
       <Middle />
       <ContactUs />
       <Footer />
-      {/* ... existing code ... */}
     </div>
   );
 }
