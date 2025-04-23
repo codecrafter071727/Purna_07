@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function ProjectPurna() {
   const { darkMode, toggleDarkMode } = useTheme();
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  useEffect(() => {
+    // Trigger animations after component mounts
+    setIsLoaded(true);
+  }, []);
   
   return (
-    <div className="min-h-screen w-full relative bg-cover bg-center" 
+    <div className="min-h-screen w-full relative bg-cover bg-center overflow-hidden" 
          style={{ backgroundImage: "url('https://res.cloudinary.com/dub7qyv8e/image/upload/v1745351111/ChatGPT_Image_Apr_21_2025_12_07_41_AM_w0ojn6.png')" }}>
       {/* Navigation - Optimized for mobile */}
-      <nav className="flex flex-col sm:flex-row justify-between items-center p-3 sm:p-4 md:p-6 lg:px-12 relative z-10">
-        <div className="text-white text-lg sm:text-xl md:text-2xl font-medium mb-2 sm:mb-0">Project Purna</div>
-        <div className="flex items-center space-x-4 md:space-x-8 text-white">
+      <nav className={`flex flex-col sm:flex-row justify-between items-center p-3 sm:p-4 md:p-6 lg:px-12 relative z-10 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
+        <div className="text-white text-lg sm:text-xl md:text-2xl font-medium mb-2 sm:mb-0 hover:scale-105 transition-transform duration-300">Project Purna</div>
+        
+        {/* Mobile-optimized navigation links */}
+        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 md:space-x-8 text-white">
           <button 
             onClick={toggleDarkMode}
-            className="p-2 rounded-full bg-stone-700/50 hover:bg-stone-600/70 transition-colors"
+            className="p-2 rounded-full bg-stone-700/50 hover:bg-stone-600/70 transition-all duration-300 hover:scale-110 hover:rotate-12"
             aria-label="Toggle dark mode"
           >
             {darkMode ? (
@@ -26,21 +34,34 @@ export default function ProjectPurna() {
               </svg>
             )}
           </button>
-          <a href="#mission" className="hover:underline text-sm sm:text-base md:text-lg">Our Mission</a>
-          <a href="#team" className="hover:underline text-sm sm:text-base md:text-lg">Meet Our Team</a>
-          <a href="#contact" className="hover:underline text-sm sm:text-base md:text-lg">Contact</a>
+          <a href="#mission" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
+            Our Mission
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#team" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
+            Meet Our Team
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#contact" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
+            Contact
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </div>
       </nav>
 
-      {/* Main Hero Content - Adjusted spacing for mobile and desktop */}
-      <div className="flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-20 pb-8 sm:pt-24 md:pt-28 md:pb-16">
-        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-6 sm:mb-8 md:mb-12 tracking-widest uppercase font-serif mt-0 sm:mt-4 md:mt-0">
-          THE MISSION TO<br className="block sm:hidden" />COMPLETE<br className="hidden sm:block" />
-          <span className="block mt-2 sm:mt-3">THE UNFINISHED</span>
+      {/* Main Hero Content - Improved for mobile */}
+      <div className={`flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-12 pb-4 sm:pt-20 md:pt-24 md:pb-16 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-2 sm:mb-4 md:mb-6 tracking-wider sm:tracking-widest uppercase font-serif transition-all duration-700 hover:tracking-[0.2em] leading-relaxed">
+          <span className={`inline-block sm:block transition-transform duration-700 ${isLoaded ? 'translate-x-0' : '-translate-x-20'}`}>THE MISSION TO COMPLETE</span>
+          
+          {/* Reduced gap between lines for laptop view */}
+          <br className="hidden sm:block md:hidden" />
+          <span className="hidden md:inline-block md:mx-2"> </span>
+          <span className={`inline-block sm:block md:inline-block mt-0 sm:mt-1 md:mt-0 transition-transform duration-700 ${isLoaded ? 'translate-x-0' : 'translate-x-20'}`}>THE UNFINISHED</span>
         </h1>
         
-        <div className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto mb-4 sm:mb-3">
-          <p className="text-white text-sm sm:text-base md:text-lg px-4 sm:p-4 leading-relaxed font-serif line-clamp-4 sm:line-clamp-none">
+        <div className={`max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto mb-4 sm:mb-3 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <p className="text-white text-sm sm:text-base md:text-lg px-2 sm:px-4 py-1 sm:py-2 leading-relaxed font-serif">
             We are a collective of historians, architects, artisans, spiritual leaders, and 
             cultural conservationists working toward completing the unfinished Bhojeshwar 
             Temple. Guided by ancient blueprints, historical texts, and cutting-edge 
@@ -48,13 +69,13 @@ export default function ProjectPurna() {
           </p>
         </div>
 
-        <button className="mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-colors text-xs sm:text-sm md:text-base">
+        <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           Learn more
         </button>
       </div>
 
-      {/* Dark overlay - slightly increased opacity for better readability */}
-      <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
+      {/* Dark overlay with subtle animation */}
+      <div className="absolute inset-0 bg-black opacity-30 z-0 animate-pulse-slow"></div>
     </div>
   );
 }

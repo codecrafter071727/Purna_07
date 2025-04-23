@@ -6,3 +6,9 @@ html {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animate-fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: all 0.7s ease-in-out;
+}
