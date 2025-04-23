@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface BhojpurLegacyComponentProps {
   imageUrl?: string;
@@ -19,8 +20,10 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
   description2 = "Built during the reign of King Bhoja (1010–1055 CE) of the Paramara dynasty, the temple was envisioned as a towering tribute to Lord Shiva. Its construction, however, was abruptly halted, possibly due to war, natural calamities, or the death of the king himself.",
   buttonText = "Learn more",
 }) => {
+  const { darkMode } = useTheme();
+  
   return (
-    <div id="mission" className="flex flex-col md:flex-row bg-[#ECE4DA] p-6 sm:p-8 md:p-10 w-full">
+    <div id="mission" className={`flex flex-col md:flex-row ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} p-6 sm:p-8 md:p-10 w-full`}>
       {/* Left side - Image */}
       <div className="w-full md:w-1/2 mb-8 md:mb-0">
         <img
@@ -32,19 +35,19 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
       
       {/* Right side - Content */}
       <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-12 flex flex-col">
-        <h2 className="text-3xl sm:text-4xl font-serif mb-8 md:mb-12 text-stone-800 text-center md:text-left">{title}</h2>
+        <h2 className={`text-3xl sm:text-4xl font-serif mb-8 md:mb-12 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-center md:text-left`}>{title}</h2>
         
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 lg:space-x-12 mb-8 md:mb-12">
           <div className="w-full md:w-1/2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-serif mb-3 md:mb-4 text-stone-800">{subtitle1}</h3>
-            <p className="text-stone-800 text-sm sm:text-base text-center md:text-left">
+            <h3 className={`text-xl sm:text-2xl font-serif mb-3 md:mb-4 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>{subtitle1}</h3>
+            <p className={`${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-sm sm:text-base text-center md:text-left`}>
               {description1}
             </p>
           </div>
           
           <div className="w-full md:w-1/2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-serif mb-3 md:mb-4 text-stone-800">{subtitle2}</h3>
-            <p className="text-stone-800 text-sm sm:text-base text-center md:text-right">
+            <h3 className={`text-xl sm:text-2xl font-serif mb-3 md:mb-4 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>{subtitle2}</h3>
+            <p className={`${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-sm sm:text-base text-center md:text-right`}>
               {description2}
             </p>
           </div>
@@ -52,7 +55,7 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
         
         {/* Updated button with centered position and enhanced styling */}
         <div className="mt-6 md:mt-auto flex justify-center w-full">
-          <button className="bg-stone-800 text-white px-10 sm:px-16 py-4 sm:py-5 rounded-full text-base sm:text-xl font-serif tracking-wider uppercase hover:bg-stone-700 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-stone-500/30 transform">
+          <button className={`${darkMode ? 'bg-[#ECE4DA] text-stone-800 hover:bg-[#D8CFC5]' : 'bg-stone-800 text-white hover:bg-stone-700'} px-10 sm:px-16 py-4 sm:py-5 rounded-full text-base sm:text-xl font-serif tracking-wider uppercase hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-stone-500/30 transform`}>
             {buttonText}
           </button>
         </div>
