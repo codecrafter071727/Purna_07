@@ -4,16 +4,20 @@ const Loader = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const duration = 2500; // 2.5 seconds in milliseconds
+    const interval = 25; // Update every 25ms
+    const increment = 100 / (duration / interval); // Calculate increment to complete in 2.5s
+
     const timer = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(() => onLoadingComplete(), 100); // Reduced from 500 to 100ms
+          setTimeout(() => onLoadingComplete(), 50);
           return 100;
         }
-        return prev + 2; // Increased increment to complete faster
+        return Math.min(prev + increment, 100);
       });
-    }, 15); // Reduced interval from 20ms to 15ms
+    }, interval);
 
     return () => clearInterval(timer);
   }, [onLoadingComplete]);

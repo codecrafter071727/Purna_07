@@ -75,17 +75,18 @@ export default function ProjectPurna() {
             Meet Our Team
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <a href="#contact" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
+          
+          <Link to="/contact" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
             Contact
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </a>
+          </Link>
         </div>
       </nav>
 
       {/* Main Hero Content - Improved for mobile */}
       <div className={`flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-12 pb-4 sm:pt-20 md:pt-24 md:pb-16 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} relative z-10`}>
         <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-2 sm:mb-4 md:mb-6 tracking-wider sm:tracking-widest uppercase font-serif transition-all duration-700 leading-relaxed">
-          <span className="inline-block border-r-2 border-white animate-pulse">
+          <span className="inline-block border-r-2 border-white">
             {text}
           </span>
         </h1>
@@ -99,13 +100,13 @@ export default function ProjectPurna() {
           </p>
         </div>
 
-      <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        Learn more
-      </button>
-    </div>
+        <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          Learn more
+        </button>
+      </div>
 
-    {/* Dark overlay with reduced opacity */}
-    <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
-  </div>
+      {/* Dark overlay with reduced opacity */}
+      <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
+    </div>
   );
 }

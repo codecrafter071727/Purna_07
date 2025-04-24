@@ -29,10 +29,10 @@ function App() {
                     <>
                       <Home />
                       <Middle />
-                      <ContactUs />
                     </>
                   } />
                   <Route path="/team" element={<Team />} />
+                  <Route path="/contact" element={<ContactUs />} />
                 </Routes>
               </div>
               <Footer />
