@@ -5,14 +5,45 @@ import { Link } from 'react-router-dom';
 export default function ProjectPurna() {
   const { darkMode, toggleDarkMode } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
-  
+  const [text, setText] = useState('');
+  const fullText = "THE MISSION TO COMPLETE THE UNFINISHED";
+  const [isTyping, setIsTyping] = useState(true);
+
   useEffect(() => {
-    // Trigger animations after component mounts
     setIsLoaded(true);
+    let currentIndex = 0;
+    let isDeleting = false;
+    let timeoutId: NodeJS.Timeout;
+
+    const typeText = () => {
+      if (isDeleting) {
+        setText(prev => prev.slice(0, -1));
+        if (text.length === 0) {
+          isDeleting = false;
+          timeoutId = setTimeout(typeText, 1000); // Pause before typing again
+          return;
+        }
+      } else {
+        setText(fullText.slice(0, currentIndex + 1));
+        currentIndex++;
+        if (currentIndex === fullText.length) {
+          isDeleting = true;
+          currentIndex = 0;
+          timeoutId = setTimeout(typeText, 2000); // Pause before deleting
+          return;
+        }
+      }
+      
+      timeoutId = setTimeout(typeText, isDeleting ? 50 : 150); // Type slower, delete faster
+    };
+
+    timeoutId = setTimeout(typeText, 500); // Initial delay
+
+    return () => clearTimeout(timeoutId);
   }, []);
-  
+
   return (
-    <div className="min-h-screen w-full relative bg-cover bg-center  overflow-hidden" 
+    <div className="min-h-screen w-full relative bg-cover bg-center overflow-hidden" 
          style={{ backgroundImage: "url('https://res.cloudinary.com/dub7qyv8e/image/upload/v1745351111/ChatGPT_Image_Apr_21_2025_12_07_41_AM_w0ojn6.png')" }}>
       {/* Navigation - Optimized for mobile */}
       <nav className={`flex flex-col sm:flex-row justify-between items-center p-3 sm:p-4 md:p-6 lg:px-12 relative z-10 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
@@ -53,13 +84,10 @@ export default function ProjectPurna() {
 
       {/* Main Hero Content - Improved for mobile */}
       <div className={`flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 h-[85vh] sm:min-h-[80vh] pt-12 pb-4 sm:pt-20 md:pt-24 md:pb-16 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} relative z-10`}>
-        <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-2 sm:mb-4 md:mb-6 tracking-wider sm:tracking-widest uppercase font-serif transition-all duration-700 hover:tracking-[0.2em] leading-relaxed">
-          <span className={`inline-block sm:block transition-transform duration-700 ${isLoaded ? 'translate-x-0' : '-translate-x-20'}`}>THE MISSION TO COMPLETE</span>
-          
-          {/* Reduced gap between lines for laptop view */}
-          <br className="hidden sm:block md:hidden" />
-          <span className="hidden md:inline-block md:mx-2"> </span>
-          <span className={`inline-block sm:block md:inline-block mt-0 sm:mt-1 md:mt-0 transition-transform duration-700 ${isLoaded ? 'translate-x-0' : 'translate-x-20'}`}>THE UNFINISHED</span>
+        <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white font-dark mb-2 sm:mb-4 md:mb-6 tracking-wider sm:tracking-widest uppercase font-serif transition-all duration-700 leading-relaxed">
+          <span className="inline-block border-r-2 border-white animate-pulse">
+            {text}
+          </span>
         </h1>
         
         <div className={`max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto mb-4 sm:mb-3 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
@@ -71,13 +99,13 @@ export default function ProjectPurna() {
           </p>
         </div>
 
-        <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          Learn more
-        </button>
-      </div>
-
-      {/* Dark overlay with reduced opacity */}
-      <div className="absolute inset-0 bg-black opacity-60 z-0 animate-pulse-slow"></div>
+      <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        Learn more
+      </button>
     </div>
+
+    {/* Dark overlay with reduced opacity */}
+    <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
+  </div>
   );
 }
