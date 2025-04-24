@@ -6,7 +6,7 @@ export default function ProjectPurna() {
   const { darkMode, toggleDarkMode } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
   const [text, setText] = useState('');
-  const fullText = "THE MISSION TO COMPLETE THE UNFINISHED";
+  const fullText = "THE MISSION TO COMPLETE THE UNFINISHED.";
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
@@ -67,7 +67,14 @@ export default function ProjectPurna() {
             )}
           </button>
           <a href="#mission" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
-            Our Mission
+            <Link 
+              to="/mission" 
+              className={`text-lg font-medium ${
+                darkMode ? 'text-stone-200 hover:text-white' : 'text-stone-800 hover:text-stone-600'
+              } transition-colors duration-300`}
+            >
+              Our Mission
+            </Link>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </a>
           
