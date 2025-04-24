@@ -18,22 +18,24 @@ const TeamMember = ({ name, role, image, linkedin, description, index }) => {
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className={`relative overflow-hidden rounded-xl md:rounded-2xl ${
+      <div className={`relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl ${
         darkMode ? 'bg-stone-700/50' : 'bg-white/90'
       } shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgba(236,228,218,0.3)] transition-all duration-500 group hover:-translate-y-2`}>
+        {/* Adjusted image container height */}
         <div className="relative overflow-hidden h-56 sm:h-64 md:h-72">
           <img 
             src={image} 
             alt={name} 
-            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110"
           />
+          {/* Adjusted padding for mobile */}
           <div className={`absolute inset-0 ${
             darkMode 
               ? 'bg-gradient-to-t from-stone-900 via-stone-900/50' 
               : 'bg-gradient-to-t from-stone-800/90 via-stone-800/30'
           } opacity-0 group-hover:opacity-100 transition-all duration-500`}>
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-              <p className="text-[#ECE4DA] text-xs sm:text-sm mb-3 md:mb-4 leading-relaxed">
+            <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <p className="text-[#ECE4DA] text-xs sm:text-sm mb-2 sm:mb-3 md:mb-4 leading-relaxed">
                 {description}
               </p>
               <a 
@@ -55,7 +57,8 @@ const TeamMember = ({ name, role, image, linkedin, description, index }) => {
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 md:p-6 relative border-t border-stone-200/10">
+        {/* Adjusted padding for mobile */}
+        <div className="p-3 sm:p-4 md:p-6 relative border-t border-stone-200/10">
           <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-12 sm:w-16 h-0.5 ${
             darkMode ? 'bg-[#ECE4DA]/20' : 'bg-stone-200'
           } group-hover:w-24 sm:group-hover:w-32 transition-all duration-500`}></div>
@@ -75,6 +78,13 @@ const TeamMember = ({ name, role, image, linkedin, description, index }) => {
     </div>
   );
 };
+
+// In the grid container, adjust the gap for mobile
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 md:gap-8 relative">
+  {teamData.teamMembers.map((member, index) => (
+    <TeamMember key={member.id} {...member} index={index} />
+  ))}
+</div>
 
 export default function Team() {
   const { darkMode, toggleDarkMode } = useTheme();
@@ -101,7 +111,8 @@ export default function Team() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    // Update the main container to prevent horizontal overflow
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <header className={`w-full ${
         darkMode ? 'bg-[#ECE4DA] text-stone-800' : 'bg-stone-800 text-[#ECE4DA]'
       } sticky top-0 z-50 shadow-lg`}>
@@ -216,39 +227,34 @@ export default function Team() {
         </div>
       </header>
       
-      <main className={`flex-grow ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} pt-8 sm:pt-12 md:pt-16 pb-12 sm:pb-16 md:pb-20`}>
+      <main className={`flex-grow ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} pt-8 sm:pt-12 md:pt-16 pb-12 sm:pb-16 md:pb-20 w-full`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Title section moved to top */}
+          {/* Update title section for better mobile view */}
           <div className="text-center mb-8 sm:mb-12 md:mb-16 relative">
             <div className="relative inline-block">
-              <h1 className={`text-4xl sm:text-5xl md:text-6xl font-serif mb-2 relative z-10 ${
+              <h1 className={`text-3xl sm:text-5xl md:text-6xl font-serif mb-2 relative z-10 ${
                 darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'
-              } tracking-tight`}>
+              } tracking-tight px-2`}>
                 Our Team
                 <span className={`absolute -bottom-2 left-0 w-full h-1 ${
                   darkMode ? 'bg-[#ECE4DA]/20' : 'bg-stone-400'
                 } transform origin-left transition-transform duration-500`}></span>
               </h1>
-              <div className={`absolute -top-6 left-1/2 transform -translate-x-1/2 text-6xl sm:text-7xl md:text-8xl font-bold opacity-5 whitespace-nowrap ${
+              <div className={`absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2 text-4xl sm:text-7xl md:text-8xl font-bold opacity-5 whitespace-nowrap ${
                 darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'
               }`}>
                 MEET THE TEAM
               </div>
             </div>
-            <p className={`max-w-2xl mx-auto text-base sm:text-lg mt-4 sm:mt-6 ${
+            <p className={`max-w-2xl mx-auto text-sm sm:text-lg mt-4 sm:mt-6 ${
               darkMode ? 'text-[#ECE4DA]/100' : 'text-stone-800'
             } font-dark tracking-wide px-4`}>
               Meet the passionate individuals dedicated to preserving and showcasing Bhojpur's rich heritage
             </p>
           </div>
 
-          {/* Team grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 relative">
-            <div className={`absolute inset-0 bg-gradient-to-r ${
-              darkMode 
-                ? 'from-[#ECE4DA]/5 via-transparent to-[#ECE4DA]/5' 
-                : 'from-stone-800/5 via-transparent to-stone-800/5'
-            } pointer-events-none`}></div>
+          {/* Update team grid for better mobile layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 relative">
             {teamData.teamMembers.map((member, index) => (
               <TeamMember key={member.id} {...member} index={index} />
             ))}
@@ -256,5 +262,5 @@ export default function Team() {
         </div>
       </main>
     </div>
-  );
+  ); // Remove everything after this closing parenthesis
 }
