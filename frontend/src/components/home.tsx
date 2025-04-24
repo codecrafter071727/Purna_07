@@ -107,9 +107,16 @@ export default function ProjectPurna() {
           </p>
         </div>
 
-        <button className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          Learn more
-        </button>
+        
+        <Link to="/mission">
+  <button
+    className={`mt-4 sm:mt-4 md:mt-8 bg-stone-300 hover:bg-stone-400 text-stone-800 font-serif tracking-wider uppercase py-2 sm:py-3 px-6 sm:px-8 md:px-12 rounded-full transition-all duration-500 text-xs sm:text-sm md:text-base hover:scale-110 hover:shadow-lg hover:tracking-widest ${
+      isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+    }`}
+  >
+    Learn more
+  </button>
+</Link>
       </div>
 
       {/* Dark overlay with reduced opacity */}
