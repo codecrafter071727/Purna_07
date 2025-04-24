@@ -6,12 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+      // Add to the existing animations in theme.extend.animation
       animation: {
         'shimmer': 'shimmer 3s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite',
         'slide-up': 'slideUp 0.5s ease-out',
         'pulse-slow': 'pulseSlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-xy': 'gradient-xy 3s ease infinite',
       },
       keyframes: {
         shimmer: {
@@ -33,8 +35,18 @@ export default {
         pulseSlow: {
           '0%, 100%': { opacity: 0.8 },
           '50%': { opacity: 0.4 }
+        },
+        'gradient-xy': {
+          '0%, 100%': {
+            'background-size': '400% 400%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
         }
-      },
+      }
     },
   },
   plugins: [],

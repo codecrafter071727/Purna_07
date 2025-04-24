@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { Link } from 'react-router-dom';
 
 export default function ProjectPurna() {
   const { darkMode, toggleDarkMode } = useTheme();
@@ -38,10 +39,11 @@ export default function ProjectPurna() {
             Our Mission
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </a>
-          <a href="#team" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
+          
+          <Link to="/team" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
             Meet Our Team
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </a>
+          </Link>
           <a href="#contact" className="hover:underline text-sm sm:text-base md:text-lg relative group px-2">
             Contact
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
