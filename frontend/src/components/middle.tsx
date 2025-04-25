@@ -25,13 +25,12 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    // Immediately add the animation class after a short delay
-    // This ensures the section is visible even if IntersectionObserver fails
+    // Reduced animation timing for subtler effect
     const timer = setTimeout(() => {
       if (sectionRef.current) {
         sectionRef.current.classList.add('animate-fade-in');
       }
-    }, 100);
+    }, 200);
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,7 +40,7 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
           }
         });
       },
-      { threshold: 0.1, rootMargin: "50px" }
+      { threshold: 0.2, rootMargin: "40px" } // Adjusted threshold for smoother reveal
     );
     
     if (sectionRef.current) {
@@ -75,67 +74,65 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
     <div 
       id="mission" 
       ref={sectionRef}
-      className={`flex flex-col md:flex-row ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} p-6 sm:p-8 md:p-10 w-full opacity-0 transition-opacity duration-1000`}
+      className={`flex flex-col md:flex-row ${darkMode ? 'bg-stone-800' : 'bg-[#ECE4DA]'} p-6 sm:p-8 md:p-10 w-full opacity-0 transition-opacity duration-1000 relative before:absolute before:inset-x-0 before:top-0 before:h-16 before:bg-gradient-to-b ${darkMode ? 'before:from-stone-900/70 before:to-stone-800' : 'before:from-black/20 before:to-[#ECE4DA]'} before:-translate-y-full`}
     >
       {/* Left side - Image with conditional sticky positioning */}
-      <div className={`w-full md:w-1/2 mb-8 md:mb-0 p-6 ${isExpanded ? 'md:sticky md:top-24 h-fit' : ''} transition-all duration-300`}>
-        <div className={`relative ${darkMode ? 'shadow-[0_10px_30px_rgba(236,228,218,0.2)]' : ''} rounded-xl transition-all duration-500`}>
+      <div className={`w-full md:w-1/2 mb-6 md:mb-0 p-4 ${isExpanded ? 'md:sticky md:top-20 h-fit' : ''} transition-all duration-200`}>
+        <div className={`relative ${darkMode ? 'shadow-lg' : ''} rounded-lg transition-all duration-300`}>
           <img
             src={imageUrl}
             alt="Bhojpur landscape"
-            className={`w-full h-auto object-cover rounded-xl border-2 ${
-              darkMode ? 'border-[#ECE4DA]/30' : 'border-stone-500'
-            } transform hover:scale-105 transition-all duration-700 ease-in-out ${
+            className={`w-full h-auto object-cover rounded-lg transform hover:scale-102 transition-all duration-500 ease-in-out ${
               darkMode 
-                ? 'shadow-[0_15px_30px_rgba(236,228,218,0.2)]' 
-                : 'shadow-[0_10px_20px_rgba(0,0,0,0.19),_0_6px_6px_rgba(0,0,0,0.23)]'
+                ? 'shadow-md' 
+                : 'shadow-md'
             }`}
           />
           {darkMode && (
-            <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-[#ECE4DA]/20 via-[#ECE4DA]/10 to-[#ECE4DA]/20 blur-sm -z-10 animate-pulse"></div>
+            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[#ECE4DA]/10 via-[#ECE4DA]/5 to-[#ECE4DA]/10 blur-sm -z-10"></div>
           )}
         </div>
       </div>
 
       {/* Right side - Scrollable Content */}
-      <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-12 flex flex-col">
-        <h2 className={`text-3xl sm:text-4xl font-serif mb-8 md:mb-12 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-center md:text-left transform transition-all duration-700 hover:translate-x-2`}>
+      <div className="w-full md:w-1/2 p-4 sm:p-5 md:p-8 flex flex-col">
+        <h2 className={`text-2xl sm:text-3xl font-serif mb-6 md:mb-8 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-center md:text-left transform transition-all duration-500 hover:translate-x-1`}>
           {title}
         </h2>
         
-        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 lg:space-x-12 mb-8 md:mb-12">
-          <div className="w-full md:w-1/2 text-center md:text-left transform transition-all duration-700 hover:translate-y-[-5px]">
-            <h3 className={`text-xl sm:text-2xl font-serif mb-3 md:mb-4 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
+        <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 lg:space-x-8 mb-6 md:mb-8">
+          <div className="w-full md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:translate-y-[-3px]">
+            <h3 className={`text-lg sm:text-xl font-serif mb-2 md:mb-3 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
               {subtitle1}
             </h3>
-            <p className={`${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-sm sm:text-base text-center md:text-left`}>
+            <p className={`${darkMode ? 'text-[#ECE4DA]/90' : 'text-stone-700'} text-sm sm:text-base text-center md:text-left`}>
               {description1}
             </p>
           </div>
           
-          <div className="w-full md:w-1/2 text-center md:text-left transform transition-all duration-700 hover:translate-y-[-5px]">
-            <h3 className={`text-xl sm:text-2xl font-serif mb-3 md:mb-4 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
+          <div className="w-full md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:translate-y-[-3px]">
+            <h3 className={`text-lg sm:text-xl font-serif mb-2 md:mb-3 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
               {subtitle2}
             </h3>
-            <p className={`${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'} text-sm sm:text-base text-center md:text-right`}>
+            <p className={`${darkMode ? 'text-[#ECE4DA]/90' : 'text-stone-700'} text-sm sm:text-base text-center md:text-right`}>
               {description2}
             </p>
           </div>
         </div>
         
-        {/* Updated button with enhanced animation */}
-        <div className="mt-6 md:mt-auto flex justify-center w-full">
+        {/* Updated button with reduced animation intensity */}
+        <div className="mt-5 md:mt-auto flex justify-center w-full">
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
             className={`${
-              darkMode ? 'bg-[#ECE4DA] text-stone-800 hover:bg-[#D8CFC5]' : 'bg-stone-800 text-white hover:bg-stone-700'
-            } px-10 sm:px-16 py-4 sm:py-5 rounded-full text-base sm:text-xl font-serif tracking-wider uppercase 
-            hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-xl 
+              darkMode ? 'bg-[#ECE4DA]/90 text-stone-800 hover:bg-[#D8CFC5]' : 'bg-stone-700 text-white hover:bg-stone-600'
+            } px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base font-serif tracking-wide uppercase 
+            hover:scale-102 transition-all duration-300 shadow-md hover:shadow-lg 
             flex items-center space-x-2`}
           >
-            <span>{isExpanded ? 'Show Less' : 'Learn More'}</span>
+            <span>{isExpanded ? 'Show Less' : buttonText}</span>
             <svg 
-              className={`w-6 h-6 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} 
+              className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -145,19 +142,19 @@ const BhojpurLegacyComponent: React.FC<BhojpurLegacyComponentProps> = ({
           </button>
         </div>
 
-        {/* Expandable Content */}
-        <div className={`mt-8 transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        {/* Expandable Content with gentler transitions */}
+        <div className={`mt-6 transition-all duration-300 ease-in-out overflow-hidden ${isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
           {additionalContent.map((content, index) => (
             <div 
               key={index} 
-              className={`mb-8 transform transition-all duration-500 delay-${index * 200} ${
-                isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              className={`mb-6 transform transition-all duration-300 delay-${index * 100} ${
+                isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
               }`}
             >
-              <h3 className={`text-xl sm:text-2xl font-serif mb-4 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
+              <h3 className={`text-lg sm:text-xl font-serif mb-3 ${darkMode ? 'text-[#ECE4DA]' : 'text-stone-800'}`}>
                 {content.title}
               </h3>
-              <p className={`${darkMode ? 'text-[#ECE4DA]/80' : 'text-stone-700'} text-base leading-relaxed`}>
+              <p className={`${darkMode ? 'text-[#ECE4DA]/80' : 'text-stone-600'} text-sm sm:text-base leading-relaxed`}>
                 {content.text}
               </p>
             </div>

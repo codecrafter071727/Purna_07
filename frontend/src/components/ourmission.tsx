@@ -122,10 +122,9 @@ const additionalContentData = {
 };
 
 const OurMissionContent: React.FC = () => {
-  // For running text animation
   const [isLoaded, setIsLoaded] = useState(false);
-  // For dark mode toggle
   const [darkMode, setDarkMode] = useState(false);
+<<<<<<< HEAD
   // For expanded content in different sections
   const [expandedSections, setExpandedSections] = useState({
     heritage: false,
@@ -133,9 +132,12 @@ const OurMissionContent: React.FC = () => {
     community: false
   });
   
+=======
+  const [isExpanded, setIsExpanded] = useState(false); // State to manage expanded content
+
+>>>>>>> 557a089dcddcf0f72d69d860d67227b4ee074eac
   useEffect(() => {
     setIsLoaded(true);
-    
     // Initialize any global animations
     const animateBackgroundElements = () => {
       const particles = document.querySelectorAll('.bg-particle');
@@ -145,13 +147,13 @@ const OurMissionContent: React.FC = () => {
         htmlElement.style.animationDelay = `${Math.random() * 5}s`;
       });
     };
-    
     animateBackgroundElements();
   }, []);
-  
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+<<<<<<< HEAD
   
   // Toggle expanded content for specific section
   const toggleExpand = (section: 'heritage' | 'education' | 'community') => {
@@ -161,6 +163,9 @@ const OurMissionContent: React.FC = () => {
     }));
   };
   
+=======
+
+>>>>>>> 557a089dcddcf0f72d69d860d67227b4ee074eac
   return (
     <div className={`${darkMode ? 'bg-stone-800 text-gray-200' : 'bg-[#ECE4DA] text-stone-800'} overflow-x-hidden transition-colors duration-300`}>
       {/* Header with home button and dark mode toggle */}
@@ -255,6 +260,7 @@ const OurMissionContent: React.FC = () => {
               heritage and historical legacy that must be protected for generations to come.
             </p>
             
+<<<<<<< HEAD
             {/* Expandable content section */}
             <div className="pt-4">
               {expandedSections.heritage && (
@@ -288,6 +294,34 @@ const OurMissionContent: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </span>
+=======
+            {isExpanded && (
+              <div className="space-y-4">
+                <p className={`${darkMode ? 'text-gray-300' : 'text-stone-700'} leading-relaxed`}>
+                  Additional paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
+                </p>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-stone-700'} leading-relaxed`}>
+                  Additional paragraph 2: Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus.
+                </p>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-stone-700'} leading-relaxed`}>
+                  Additional paragraph 3: Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+                </p>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-stone-700'} leading-relaxed`}>
+                  Additional paragraph 4: Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                </p>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-stone-700'} leading-relaxed`}>
+                  Additional paragraph 5: Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
+                </p>
+              </div>
+            )}
+
+            <div className="pt-6">
+              <button 
+                onClick={() => setIsExpanded(!isExpanded)} 
+                className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}
+              >
+                <span className="relative z-10">{isExpanded ? 'Show Less' : 'Learn More'}</span>
+>>>>>>> 557a089dcddcf0f72d69d860d67227b4ee074eac
                 <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
               </button>
             </div>
