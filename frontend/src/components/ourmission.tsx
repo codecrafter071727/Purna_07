@@ -237,6 +237,13 @@ const OurMissionContent: React.FC = () => {
                 <span className={`inline-block mx-2 md:mx-4 ${darkMode ? 'text-gray-400' : 'text-stone-500'} text-xs md:text-sm`}>Historical Tours</span>
               </div>
             </div>
+            {/* Add Learn More button here */}
+            <div className="pt-6">
+              <button className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}>
+                <span className="relative z-10">Learn More</span>
+                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
+              </button>
+            </div>
           </div>
           
           {/* Fixed the responsiveness of this image */}
@@ -304,6 +311,13 @@ const OurMissionContent: React.FC = () => {
                   {tag}
                 </span>
               ))}
+            </div>
+            {/* Add Learn More button here */}
+            <div className="pt-6">
+              <button className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}>
+                <span className="relative z-10">Learn More</span>
+                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
+              </button>
             </div>
           </div>
         </AnimatedSection>
