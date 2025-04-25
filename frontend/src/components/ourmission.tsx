@@ -75,11 +75,63 @@ const TypingText: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
+// Additional content data for each section
+const additionalContentData = {
+  heritage: [
+    {
+      title: "Archaeological Research",
+      text: "Our team conducts ongoing archaeological research at Bhojpur sites, using advanced techniques to uncover, document, and preserve historical artifacts and structures while minimizing disturbance to the original landscape."
+    },
+    {
+      title: "Digital Preservation",
+      text: "We're creating comprehensive digital archives of Bhojpur monuments using photogrammetry, 3D scanning, and high-resolution imaging. These digital replicas serve as both educational resources and preservation insurance against potential damage or decay."
+    },
+    {
+      title: "Restoration Projects",
+      text: "Working with expert conservationists, we undertake careful restoration projects that balance authenticity with structural integrity. Each project adheres to international conservation standards while respecting the original architectural vision."
+    }
+  ],
+  education: [
+    {
+      title: "Interactive Learning Programs",
+      text: "Our educational initiatives include immersive workshops where participants engage with historical crafts, architectural techniques, and cultural practices that shaped Bhojpur's monuments and heritage sites."
+    },
+    {
+      title: "Academic Partnerships",
+      text: "We collaborate with universities and research institutions worldwide to facilitate scholarly exchange, support research projects, and create internship opportunities that advance our understanding of Bhojpur's historical significance."
+    },
+    {
+      title: "Digital Learning Resources",
+      text: "Our growing collection of online resources includes virtual tours, interactive timelines, and educational videos that make Bhojpur's history accessible to global audiences of all ages and backgrounds."
+    }
+  ],
+  community: [
+    {
+      title: "Local Artisan Support",
+      text: "We provide training and economic opportunities to local craftspeople who practice traditional arts related to Bhojpur's cultural heritage, helping ensure these skills continue to thrive while creating sustainable livelihoods."
+    },
+    {
+      title: "Heritage Tourism Development",
+      text: "Through responsible tourism initiatives, we help local communities benefit economically from cultural heritage while ensuring visitor experiences are authentic, educational, and environmentally sustainable."
+    },
+    {
+      title: "Community Heritage Councils",
+      text: "We've established local heritage councils that empower community members to participate in preservation decision-making, propose initiatives, and serve as guardians of their historical and cultural patrimony."
+    }
+  ]
+};
+
 const OurMissionContent: React.FC = () => {
   // For running text animation
   const [isLoaded, setIsLoaded] = useState(false);
   // For dark mode toggle
   const [darkMode, setDarkMode] = useState(false);
+  // For expanded content in different sections
+  const [expandedSections, setExpandedSections] = useState({
+    heritage: false,
+    education: false,
+    community: false
+  });
   
   useEffect(() => {
     setIsLoaded(true);
@@ -99,6 +151,14 @@ const OurMissionContent: React.FC = () => {
   
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+  
+  // Toggle expanded content for specific section
+  const toggleExpand = (section: 'heritage' | 'education' | 'community') => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
   
   return (
@@ -157,9 +217,10 @@ const OurMissionContent: React.FC = () => {
       {/* Mission Content with precisely aligned grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-16">
         {/* First content row */}
-        <AnimatedSection className="grid md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-32 items-center">
-          <div className="group transition-all duration-500 transform hover:translate-y-1">
-            <div className="overflow-hidden rounded-2xl shadow-lg">
+        <AnimatedSection className="grid md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-32 items-start">
+          {/* Image section with sticky positioning */}
+          <div className={`${expandedSections.heritage ? 'md:sticky' : ''} md:top-24 self-start`}>
+            <div className="overflow-hidden rounded-2xl shadow-lg group">
               <div className="relative">
                 <img 
                   src="https://i0.wp.com/compass.rauias.com/wp-content/uploads/2024/03/image-105.png?resize=666%2C387&ssl=1" 
@@ -174,6 +235,7 @@ const OurMissionContent: React.FC = () => {
             </div>
           </div>
           
+          {/* Content section with expandable text */}
           <div className="flex flex-col justify-center space-y-4">
             <h2 className={`text-2xl md:text-3xl font-bold mb-4 relative inline-block group ${darkMode ? 'text-gray-200' : 'text-stone-800'}`}>
               <span className="transition-all duration-300 hover:text-stone-700">
@@ -193,9 +255,39 @@ const OurMissionContent: React.FC = () => {
               heritage and historical legacy that must be protected for generations to come.
             </p>
             
-            <div className="pt-6">
-              <button className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}>
-                <span className="relative z-10">Learn More</span>
+            {/* Expandable content section */}
+            <div className="pt-4">
+              {expandedSections.heritage && (
+                <div className={`${darkMode ? 'bg-stone-700 text-gray-300' : 'bg-[#ECE4DA] text-stone-800'} p-4 rounded-lg mb-4 transition-all duration-300`}>
+                  {additionalContentData.heritage.map((content, index) => (
+                    <div 
+                      key={index} 
+                      className={`mb-6 transform transition-all duration-500 delay-${index * 200}`}
+                    >
+                      <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-gray-200' : 'text-stone-700'}`}>
+                        {content.title}
+                      </h4>
+                      <p className="leading-relaxed">{content.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <button 
+                onClick={() => toggleExpand('heritage')}
+                className={`mt-2 px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}
+              >
+                <span className="relative z-10 flex items-center">
+                  {expandedSections.heritage ? "Show Less" : "Learn More"}
+                  <svg 
+                    className={`w-5 h-5 ml-2 transition-transform duration-300 ${expandedSections.heritage ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
                 <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
               </button>
             </div>
@@ -203,7 +295,7 @@ const OurMissionContent: React.FC = () => {
         </AnimatedSection>
 
         {/* Second content row with symmetrical layout */}
-        <AnimatedSection className="grid md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-32 items-center">
+        <AnimatedSection className="grid md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-32 items-start">
           <div className="flex flex-col justify-center space-y-4 order-2 md:order-1">
             <h2 className={`text-2xl md:text-3xl font-bold mb-4 relative inline-block group ${darkMode ? 'text-gray-200' : 'text-stone-800'}`}>
               <span className="transition-all duration-300 hover:text-stone-700">
@@ -223,6 +315,43 @@ const OurMissionContent: React.FC = () => {
               that brings history to life for everyone, regardless of their background or prior knowledge.
             </p>
             
+            {/* Expandable content section */}
+            <div className="pt-4">
+              {expandedSections.education && (
+                <div className={`${darkMode ? 'bg-stone-700 text-gray-300' : 'bg-[#ECE4DA] text-stone-800'} p-4 rounded-lg mb-4 transition-all duration-300`}>
+                  {additionalContentData.education.map((content, index) => (
+                    <div 
+                      key={index} 
+                      className={`mb-6 transform transition-all duration-500 delay-${index * 200}`}
+                    >
+                      <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-gray-200' : 'text-stone-700'}`}>
+                        {content.title}
+                      </h4>
+                      <p className="leading-relaxed">{content.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <button 
+                onClick={() => toggleExpand('education')}
+                className={`mt-2 px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}
+              >
+                <span className="relative z-10 flex items-center">
+                  {expandedSections.education ? "Show Less" : "Learn More"}
+                  <svg 
+                    className={`w-5 h-5 ml-2 transition-transform duration-300 ${expandedSections.education ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
+              </button>
+            </div>
+            
             {/* Running text with professional styling - made responsive */}
             <div className="pt-6 overflow-hidden relative h-6">
               <div className={`whitespace-nowrap transition-transform duration-[20s] ease-linear ${isLoaded ? 'animate-marquee' : ''}`}>
@@ -236,13 +365,6 @@ const OurMissionContent: React.FC = () => {
                 <span className="inline-block mx-1 text-stone-400">•</span>
                 <span className={`inline-block mx-2 md:mx-4 ${darkMode ? 'text-gray-400' : 'text-stone-500'} text-xs md:text-sm`}>Historical Tours</span>
               </div>
-            </div>
-            {/* Add Learn More button here */}
-            <div className="pt-6">
-              <button className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}>
-                <span className="relative z-10">Learn More</span>
-                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
-              </button>
             </div>
           </div>
           
@@ -301,6 +423,43 @@ const OurMissionContent: React.FC = () => {
               a model where cultural preservation contributes to community development and economic growth.
             </p>
             
+            {/* Expandable content section */}
+            <div className="pt-4">
+              {expandedSections.community && (
+                <div className={`${darkMode ? 'bg-stone-700 text-gray-300' : 'bg-[#ece4da] text-stone-800'} p-4 rounded-lg mb-4 overflow-y-auto transition-all duration-300`}>
+                  {additionalContentData.community.map((content, index) => (
+                    <div 
+                      key={index} 
+                      className={`mb-6 transform transition-all duration-500 delay-${index * 200}`}
+                    >
+                      <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-gray-200' : 'text-stone-700'}`}>
+                        {content.title}
+                      </h4>
+                      <p className="leading-relaxed">{content.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <button 
+                onClick={() => toggleExpand('community')}
+                className={`mt-2 px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}
+              >
+                <span className="relative z-10 flex items-center">
+                  {expandedSections.community ? "Show Less" : "Learn More"}
+                  <svg 
+                    className={`w-5 h-5 ml-2 transition-transform duration-300 ${expandedSections.community ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
+              </button>
+            </div>
+            
             <div className="pt-6 flex flex-wrap gap-2">
               {["Volunteer", "Participate", "Contribute", "Learn"].map((tag, index) => (
                 <span 
@@ -311,13 +470,6 @@ const OurMissionContent: React.FC = () => {
                   {tag}
                 </span>
               ))}
-            </div>
-            {/* Add Learn More button here */}
-            <div className="pt-6">
-              <button className={`px-4 md:px-6 py-2 md:py-3 ${darkMode ? 'bg-[#c6b8a7] hover:bg-[#d8cabe]' : 'bg-stone-800 hover:bg-stone-700'} text-[#ab8152] rounded-lg transition-all duration-300 overflow-hidden relative group`}>
-                <span className="relative z-10">Learn More</span>
-                <span className={`absolute top-0 left-0 w-full h-full ${darkMode ? 'bg-[#d8cabe]' : 'bg-stone-700'} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></span>
-              </button>
             </div>
           </div>
         </AnimatedSection>
